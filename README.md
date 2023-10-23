@@ -2,4 +2,4 @@
 
 We are 9 students from Télécom SudParis working for a school project. 
 
-We are working really hard
+We are working 
