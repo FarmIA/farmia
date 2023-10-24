@@ -1,0 +1,2 @@
+#on met dans ce fichiers les dossier ignorés par git
+.ipynb_checkpoints
