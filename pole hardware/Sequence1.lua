@@ -14,6 +14,9 @@ local stacks = {
 -- Distance entre les plantes
 local distance = d
 
+-- Temps d'arrosage
+local T = t
+
 -- Fonction waterPlant
 function waterPlant(x,y,z)
     goTo(x,y,z)
