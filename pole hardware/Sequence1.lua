@@ -37,9 +37,18 @@ function waterStack(stack)
     end
 end
 
+-- Fonction qui arrose dans le vide pour faire monter l'eau le long du tuyau pour la première utilisation de la journée
+function Initwater(time)
+    water(HIGH)
+    sleep(time)
+    water(LOW)
+end
+
+Initwater(15)
 -- Arrose toutes les piles de plantes
 for _, stack in ipairs(stacks) do
     waterStack(stack)
 end
 
+-- retour home
 goTo(0,0,0)
