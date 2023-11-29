@@ -51,4 +51,4 @@ for _, stack in ipairs(stacks) do
 end
 
 -- retour home
-goTo(0,0,0)
+goTo(home)
