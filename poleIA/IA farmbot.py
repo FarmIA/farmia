@@ -1,3 +1,7 @@
+"""
+Trains a logistic regression model to predict whether a plant should be watered based on its type and the humidity level.
+"""
+
 import numpy as np
 import copy
 import matplotlib.pyplot as plt
