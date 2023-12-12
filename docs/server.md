@@ -38,6 +38,7 @@ ssh -i path/to/sshkey <user>@<serveurIP>
 ```
 
 Si la connexion est établie. C'est super bravo. Mais c'est pas fini.  
+
 Maintenant il va falloir se protéger des vilains méchants qui veulent s'introduire chez vous.  
 > Comment faire ? 
 
@@ -45,6 +46,7 @@ Et bien leur fermer la porte au nez bien sur !
 En gros le risque c'est que tout le monde peut essayer de se connecter sur le server avec un nom d'utilisateur et un mot de passe. Le problème c'est que ça, ça se bruteforce. Pas cool ...  
 Il faut donc éviter ça, et interdire les connexions par mots de passe tout simplement.  
 On va donc se rendre dans les fichiers de configuration du serveur ssh.  
+
 On cherche et on modifie dans le fichier `/etc/ssh/sshd_config` les lignes 
 ```
 PasswordAuthentication no
