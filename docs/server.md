@@ -52,3 +52,7 @@ On cherche et on modifie dans le fichier `/etc/ssh/sshd_config` les lignes
 PasswordAuthentication no
 PermitEmptyPasswords no
 ```
+Après avoir fait ça il faut relancer le service ssh :  
+```
+service ssh restart
+```
