@@ -2,6 +2,9 @@
 
 ## A partir du setup jusqu'à l'utilisation
 
+Premièrement il vous faudra une machine sur laquelle le serveur va tourner. Cette machine peut etre un ordinateur dans la salle, un ordinateur d'un membre, une machine virtuelle (MiNET ou non). Attention cependant pour les machines virtuelles, il vous faudra un stockage important.  
+Dans notre cas (2024), on a trouvé un super ordinateur de MiNET.  
+
 ## Mettre l'OS sur la machine vierge
 
 Il vous faudra une clé bootable avec l'OS que vous voulez installer. Nous on a choisi *Debian 12* car je connais cette distribution et qu'elle a fait ses preuves. Je vous laisse trouver comment faire pour obtenir une clé bootable.  
@@ -22,8 +25,7 @@ Le serveur devrait redémarrer et vous êtes partis. GG
 
 ## La préparation du joli serveur
 
-Premièrement il vous faudra une machine sur laquelle le serveur va tourner. Cette machine peut etre un ordinateur dans la salle, un ordinateur d'un membre, une machine virtuelle (MiNET ou non). Attention cependant pour les machines virtuelles, il vous faudra un stockage important.  
-Dans notre cas (2024), on a trouvé un super ordinateur de MiNET. On a installé Debian 12 dessus sans interface graphique (et oui logique c'est un serveur).  
+Nous on a installé Debian 12 dessus sans interface graphique (et oui logique c'est un serveur).  
 
 ### 1. La première étape est de mettre un serveur `ssh` dessus
 En gros on veut permettre aux utilisateurs du serveur de se connecter à distance au serveur via le protocole `ssh`.  
@@ -84,9 +86,9 @@ ou
 service ssh restart
 ```
 
-Bravo les champions. Vous avez maintenant accès au serveur à distance ... **tant que vous etes sur le campus** ... le firewall du campus vous empeche d'y accéder depuis l'extérieur. Mais c'est déjà bien.  
+Bravo les champions. Vous avez maintenant accès au serveur à distance ... **tant que vous êtes sur le campus** ... le firewall du campus vous empêche d'y accéder depuis l'extérieur. Mais c'est déjà bien.  
 
-Vous pouvez ajouter le serveur à votre `.ssh/config` en ajoutant ses lignes :
+Vous pouvez ajouter le serveur à votre `.ssh/config` en ajoutant ses lignes sur vos ordis :
 ```
 ### Serveur Farmia
 Host farmia
