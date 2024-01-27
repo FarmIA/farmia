@@ -11,3 +11,7 @@ Notre but premier est de faire découvrir l'IA au grand public par le biais d'un
 We are 9 students from Télécom SudParis working on a school project aiming to create an autonomous agricultural robot.
 
 We are working on a FarmBot. 🦾
+
+
+
+Les docs sont dans FarmIA/docs/src/content/docs
