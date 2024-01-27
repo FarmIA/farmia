@@ -12,6 +12,6 @@ We are 9 students from Télécom SudParis working on a school project aiming to 
 
 We are working on a FarmBot. 🦾
 
-
+# Docs
 
 Les docs sont dans FarmIA/docs/src/content/docs
