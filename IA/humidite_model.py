@@ -6,44 +6,37 @@ import numpy as np
 import copy
 import matplotlib.pyplot as plt
 
-def arrose_easy(plante, humidité):
+def arrose_test_function(plante, humidité):
     if humidité < 50:
-        #print("J'arrose la plante " + str(plante))
         return 1
     else:
-        #print("Je n'arrose pas la plante " + str(plante))
         return 0
 
-def arrose_hard(plante, humidité):
-    if plante < 3:
-        if humidité < 50:
-            #print("J'arrose la plante " + str(plante))
-            return 1
-        else:
-            #print("Je n'arrose pas la plante " + str(plante))
-            return 0
-    else:
-        if humidité > 50:
-            #print("J'arrose la plante " + str(plante))
-            return 1
-        else:
-            #print("Je n'arrose pas la plante " + str(plante))
-            return 0
     
 ### Generate data (replace it with real data when we have it)
 # 0 = tomate; 1 = basilic; 2 = menthe; 3 = persil; 4 = ciboulette (random plants for now)
 plant_train = np.array([np.random.randint(0, 5) for i in range(1000000)])
 humidity_train = np.array([np.random.randint(10, 90) for i in range(1000000)])
 X_train = np.array([[plant_train[i] for i in range(1000000)], [humidity_train[i] for i in range(1000000)]])
-Y_train = np.array([[arrose_easy(plant_train[i], humidity_train[i]) for i in range(1000000)]])
+Y_train = np.array([[arrose_test_function(plant_train[i], humidity_train[i]) for i in range(1000000)]])
 
 plant_test = np.array([np.random.randint(0, 5) for i in range(10000)])
 humidity_test = np.array([np.random.randint(10, 90) for i in range(10000)])
 X_test = np.array([[plant_train[i] for i in range(10000)], [humidity_train[i] for i in range(10000)]])
-Y_test = np.array([[arrose_easy(plant_test[i], humidity_test[i]) for i in range(10000)]])
+Y_test = np.array([[arrose_test_function(plant_test[i], humidity_test[i]) for i in range(10000)]])
 
 m_train = X_train.shape[1]
 m_test = X_test.shape[1]
+
+num_px = 64
+
+Xim_train = np.random.rand(num_px * num_px * 3, m_train)
+Xim_test = np.random.rand(num_px * num_px * 3, m_test)
+
+Yim_train = np.random.randint(0, 2, (1, m_train))
+Yim_test = np.random.randint(0, 2, (1, m_test))
+
+
 
 print ("Number of training examples: m_train = " + str(m_train))
 print ("Number of testing examples: m_test = " + str(m_test))
@@ -229,5 +222,58 @@ def model(X_train, Y_train, X_test, Y_test, num_iterations=2000, learning_rate=0
          "num_iterations": num_iterations}
     return d
 
+import numpy as np
+import copy
+
+def plante_malade(X_train, Y_train, X_test, Y_test, num_iterations=2000, learning_rate=0.5, print_cost=False):
+    """
+    Train a model to recognize whether a plant is diseased or not, based on images
+    
+    Arguments:
+    X_train -- training set represented by a numpy array of shape (num_px * num_px * 3, m_train)
+    Y_train -- training labels represented by a numpy array (vector) of shape (1, m_train)
+    X_test -- test set represented by a numpy array of shape (num_px * num_px * 3, m_test)
+    Y_test -- test labels represented by a numpy array (vector) of shape (1, m_test)
+    num_iterations -- hyperparameter representing the number of iterations to optimize the parameters
+    learning_rate -- hyperparameter representing the learning rate used in the update rule of optimize()
+    print_cost -- Set to True to print the cost every 100 iterations
+    
+    Returns:
+    d -- dictionary containing information about the model.
+    """
+
+    # Initialiser les paramètres avec des zéros
+    w, b = initialize_with_zeros(X_train.shape[0])
+
+    # Descente de gradient
+    params, grads, costs = optimize(w, b, X_train, Y_train, num_iterations, learning_rate, print_cost)
+
+    # Récupérer les paramètres w et b du dictionnaire "params"
+    w = params["w"]
+    b = params["b"]
+
+    # Prédire les exemples de l'ensemble de test
+    Y_prediction_test = predict(w, b, X_test)
+    Y_prediction_train = predict(w, b, X_train)
+
+    # Imprimer les erreurs d'entraînement/test
+    if print_cost:
+        print("Précision de l'entraînement : {} %".format(100 - np.mean(np.abs(Y_prediction_train - Y_train)) * 100))
+        print("Précision du test : {} %".format(100 - np.mean(np.abs(Y_prediction_test - Y_test)) * 100))
+
+    # Créer le dictionnaire de sortie
+    d = {"costs": costs,
+         "Y_prediction_test": Y_prediction_test,
+         "Y_prediction_train": Y_prediction_train,
+         "w": w,
+         "b": b,
+         "learning_rate": learning_rate,
+         "num_iterations": num_iterations}
+    return d
+
+
+# Training
 
 logistic_regression_model = model(X_train, Y_train, X_test, Y_test, num_iterations=1000, learning_rate=0.005, print_cost=True)
+
+maladies_regression_model = plante_malade(Xim_train, Yim_train, Xim_test, Yim_test, num_iterations=1000, learning_rate=0.005, print_cost=True)
