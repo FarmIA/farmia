@@ -3,7 +3,7 @@
 ## A partir du setup jusqu'à l'utilisation
 
 Premièrement il vous faudra une machine sur laquelle le serveur va tourner. Cette machine peut etre un ordinateur dans la salle, un ordinateur d'un membre, une machine virtuelle (MiNET ou non). Attention cependant pour les machines virtuelles, il vous faudra un stockage important.  
-Dans notre cas (2024), on a trouvé un super ordinateur de MiNET.  
+Dans notre cas (2024-2025), on a trouvé un ordinateur en demandant à notre tuteur sinon vous avez aussi le projecteur mais +galère.  
 
 ## Mettre l'OS sur la machine vierge
 
