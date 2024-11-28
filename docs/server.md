@@ -9,7 +9,7 @@ Dans notre cas (2024-2025), on a trouvé un ordinateur en demandant à notre tut
 
 Il vous faudra une clé bootable avec l'OS que vous voulez installer. Nous on a choisi *Debian 12* car je connais cette distribution et qu'elle a fait ses preuves. Je vous laisse trouver comment faire pour obtenir une clé bootable.  
 Ensuite il faut donc booter l'ordi sur la clé, suivre les étapes de l'installeur graphique.  
-Mais en gros les étapes sont :  
+Mais en gros les étapes sont :
 - Le choix de la langue (osef choisissez celle que vous voulez, l'anglais c'est cool pour chercher les bugs sur internet)
 - le choix de la langue du clavier (ça c'est plus important)
 - La configuration réseau automatique (si ça marhce pas à cause de la connexion au serveur DHCP, demandez à la DISI)
@@ -18,7 +18,7 @@ Mais en gros les étapes sont :
 - Le renseignement du mot de passe `root`
 - Le renseignement d'un premier user (vous en ajouterez d'autres par la suite)
 - le choix des packages à installer (installez au moins le serveur ssh, pour l'interface graphique c'est pas du tout obligatoire mais ça peut être confortable et désactivable pour sauvegarder les ressources de l'ordi)
-- installer `grub` (c'est plutot important pour éviter des galères)  
+- installer `grub` (c'est plutot important pour éviter des galères)
 
 Voilà en gros c'est tout !  
 Le serveur devrait redémarrer et vous êtes partis. GG
@@ -28,6 +28,7 @@ Le serveur devrait redémarrer et vous êtes partis. GG
 Nous on a installé Debian 12 dessus sans interface graphique (et oui logique c'est un serveur).  
 
 ### 1. La première étape est de mettre un serveur `ssh` dessus
+Logiquement nous sommes deja passé sur la plupart des installations mais refaites les au cas où !
 En gros on veut permettre aux utilisateurs du serveur de se connecter à distance au serveur via le protocole `ssh`.  
 Pour se faire si un serveur ssh n'est pas deja installé sur la machine :  
 Sur le serveur :  
@@ -47,14 +48,14 @@ ssh-keygen -t ed25519
 Ensuite suivez les instructions (mettez un code).  
 ### **Ne partagez à personne votre clé privée**
 
-Ensuite il faut l'envoyer sur le serveur : 
-```
-ssh-copy-id -i path/to/sshkey <user>@<serveurIP>
-```
-
-D'ailleurs pour connaitre l'IP du serveur : 
+Il vous faut ensuite l'adresse du serveur donc pour connaitre l'IP du serveur : 
 ```
 ip -4 addr
+```
+
+Ensuite il faut envoyer la clé sur le serveur : 
+```
+ssh-copy-id -i path/to/sshkey <user>@<serveurIP>
 ```
 
 Ensuite il faut vérifier que vous avez accès à distance au serveur :  
@@ -62,7 +63,8 @@ Ensuite il faut vérifier que vous avez accès à distance au serveur :
 ssh -i path/to/sshkey <user>@<serveurIP>
 ```
 
-Si la connexion est établie. C'est super bravo. Mais c'est pas fini.  
+Si la connexion est établie. C'est super bravo. Mais c'est pas fini.
+Sinon cela veut dire que les connexions par mot de passe sont interdites et il va falloir modifier ca.
 
 Maintenant il va falloir se protéger des vilains méchants qui veulent s'introduire chez vous.  
 > Comment faire ? 
@@ -72,11 +74,13 @@ En gros le risque c'est que tout le monde peut essayer de se connecter sur le se
 Il faut donc éviter ça, et interdire les connexions par mots de passe tout simplement.  
 On va donc se rendre dans les fichiers de configuration du serveur ssh.  
 
+
 On cherche et on modifie dans le fichier `/etc/ssh/sshd_config` les lignes 
 ```
 PasswordAuthentication no
 PermitEmptyPasswords no
 ```
+
 Après avoir fait ça il faut relancer le service ssh :  
 ```
 systemctl restart ssh
