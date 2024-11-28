@@ -1,4 +1,4 @@
-# Ici on va parler de la partie serveur
+# Ici on va parler de la partie serveur (UPDATE 2025)
 
 ## A partir du setup jusqu'à l'utilisation
 
